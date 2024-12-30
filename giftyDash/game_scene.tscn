@@ -1,0 +1,175 @@
+[gd_scene load_steps=15 format=3 uid="uid://dcyv2rgedpyn3"]
+
+[ext_resource type="PackedScene" uid="uid://cyjb1ftcevnho" path="res://Scenes/elf.tscn" id="1_80gul"]
+[ext_resource type="Texture2D" uid="uid://2lv4nm0e3rci" path="res://Art/Plan 5.png" id="1_dft2a"]
+[ext_resource type="PackedScene" uid="uid://ca2yp523thpiw" path="res://Scenes/flowing_ice_node.tscn" id="2_bdocf"]
+[ext_resource type="Texture2D" uid="uid://cr5b08ihm13us" path="res://Art/Plan 4.png" id="2_dy1wr"]
+[ext_resource type="Texture2D" uid="uid://2jnx50g76tj3" path="res://Art/Plan 3.png" id="3_qt81y"]
+[ext_resource type="Texture2D" uid="uid://dk6i4jqvlf82h" path="res://Art/Plan 1.png" id="3_vqndn"]
+[ext_resource type="Texture2D" uid="uid://djb81nqgdgldi" path="res://Art/Plan 2.png" id="4_ptdm3"]
+[ext_resource type="PackedScene" uid="uid://d15xx25tlomm7" path="res://Scenes/present.tscn" id="8_0n3ue"]
+[ext_resource type="PackedScene" uid="uid://c7ylldoi25i15" path="res://Scenes/present2.tscn" id="9_5oyno"]
+[ext_resource type="PackedScene" uid="uid://d302e1x2aplsd" path="res://Scenes/santa.tscn" id="10_2lk13"]
+[ext_resource type="PackedScene" uid="uid://gxaeuimejik" path="res://Scenes/score_label.tscn" id="11_3h30g"]
+
+[sub_resource type="GDScript" id="GDScript_5takg"]
+script/source = "extends RigidBody2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vhq4u"]
+size = Vector2(67.5, 645)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_swibv"]
+size = Vector2(585, 41)
+
+[node name="GameScene" type="Node2D"]
+
+[node name="Parallax2D5" type="Parallax2D" parent="."]
+repeat_size = Vector2(576, 0)
+autoscroll = Vector2(10, 0)
+repeat_times = 2
+follow_viewport = false
+ignore_camera_scroll = true
+
+[node name="Plan1" type="Sprite2D" parent="Parallax2D5"]
+z_index = -1
+position = Vector2(-1, -29)
+texture = ExtResource("1_dft2a")
+
+[node name="Parallax2D4" type="Parallax2D" parent="."]
+repeat_size = Vector2(576, 0)
+autoscroll = Vector2(20, 0)
+repeat_times = 2
+follow_viewport = false
+ignore_camera_scroll = true
+
+[node name="Plan1" type="Sprite2D" parent="Parallax2D4"]
+z_index = -1
+position = Vector2(-1, -29)
+texture = ExtResource("2_dy1wr")
+
+[node name="Parallax2D3" type="Parallax2D" parent="."]
+repeat_size = Vector2(576, 0)
+autoscroll = Vector2(22, 0)
+repeat_times = 2
+follow_viewport = false
+ignore_camera_scroll = true
+
+[node name="Plan1" type="Sprite2D" parent="Parallax2D3"]
+z_index = -1
+position = Vector2(-1, -29)
+texture = ExtResource("3_qt81y")
+
+[node name="Parallax2D2" type="Parallax2D" parent="."]
+repeat_size = Vector2(576, 0)
+autoscroll = Vector2(25, 0)
+repeat_times = 2
+follow_viewport = false
+ignore_camera_scroll = true
+
+[node name="Plan1" type="Sprite2D" parent="Parallax2D2"]
+z_index = -1
+position = Vector2(-1, -29)
+texture = ExtResource("4_ptdm3")
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+repeat_size = Vector2(576, 0)
+autoscroll = Vector2(30, 0)
+repeat_times = 2
+follow_viewport = false
+ignore_camera_scroll = true
+
+[node name="Plan1" type="Sprite2D" parent="Parallax2D"]
+z_index = -1
+position = Vector2(-1, -29)
+texture = ExtResource("3_vqndn")
+
+[node name="Elf" parent="." instance=ExtResource("1_80gul")]
+position = Vector2(-68, 98)
+
+[node name="Left Wall" type="RigidBody2D" parent="." groups=["out"]]
+position = Vector2(-556, 274)
+freeze = true
+script = SubResource("GDScript_5takg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left Wall" groups=["out"]]
+position = Vector2(231.75, -234)
+shape = SubResource("RectangleShape2D_vhq4u")
+
+[node name="Right Wall" type="RigidBody2D" parent="."]
+position = Vector2(95, 277)
+freeze = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right Wall"]
+position = Vector2(231.75, -313.5)
+shape = SubResource("RectangleShape2D_vhq4u")
+
+[node name="Floor" type="RigidBody2D" parent="."]
+position = Vector2(-278, 137)
+freeze = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(279.5, 16.5)
+shape = SubResource("RectangleShape2D_swibv")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="FlowingIceNode" parent="." instance=ExtResource("2_bdocf")]
+scroll_offset = Vector2(-30, 146)
+repeat_size = Vector2(32, 0)
+autoscroll = Vector2(-80, 0)
+repeat_times = 20
+follow_viewport = false
+ignore_camera_scroll = true
+
+[node name="Present" parent="." instance=ExtResource("8_0n3ue")]
+position = Vector2(97, 0)
+mass = 0.3
+gravity_scale = 0.4
+
+[node name="Present4" parent="." instance=ExtResource("8_0n3ue")]
+position = Vector2(97, 0)
+mass = 0.3
+gravity_scale = 0.4
+
+[node name="Present3" parent="." instance=ExtResource("8_0n3ue")]
+position = Vector2(97, 0)
+mass = 0.3
+gravity_scale = 0.4
+
+[node name="Present2" parent="." instance=ExtResource("9_5oyno")]
+position = Vector2(115, -46)
+rotation = -1.01094
+
+[node name="Santa" parent="." node_paths=PackedStringArray("spawnNode") instance=ExtResource("10_2lk13")]
+position = Vector2(-146, -110)
+point_a = Vector2(-146, -110)
+point_b = Vector2(164, -72)
+speed = 20.0
+spawnNode = NodePath("../spawn")
+
+[node name="spawn" type="Node2D" parent="."]
+position = Vector2(-2, -17)
+scale = Vector2(2, 2)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -47.0
+offset_top = 146.0
+offset_right = 87.0
+offset_bottom = 186.0
+color = Color(0, 0, 0, 0.603922)
+
+[node name="ScoreLabel" parent="." instance=ExtResource("11_3h30g")]
+offset_top = 146.215
+offset_bottom = 169.215
